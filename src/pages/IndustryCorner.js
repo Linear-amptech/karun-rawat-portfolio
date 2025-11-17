@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   ExternalLink,
   Building2,
-  Zap,
-  TestTube,
   Handshake,
-  Award,
-  Users,
-  Target,
   Mail,
   Phone,
   MapPin,
@@ -20,11 +15,9 @@ import WAIT from "../assets/Industry_corner/WAIT (Warning Ahead of Intersections
 import Ultra_wideband_linearizer from "../assets/Industry_corner/Ultra-wideband linearizer (250 MHz BW) with.png";
 import multi_generation from "../assets/Industry_corner/Multi-generation (2G, 3G, 4G), multi-standard (GSM, WCDMA, WiMAX, LTE) Modem.png";
 import Wideband_highly_efficient_RF from "../assets/Industry_corner/Wideband highly efficient RF power amplifier module.png";
-import L_Band_Power_Amplifier from "../assets/Industry_corner/L-Band Power Amplifier (100W).png";
-import UHF_SATCOM_Link_Power_Amplifier from "../assets/Industry_corner/UHF SATCOM LINK Power Amplifier.png";
-import Test_Bed_for_Char from "../assets/Industry_corner/Test-Bed for Characterization & Non-linear Behavioral Modeling.png";
-import N_Linear_Vector_Network_Analyzer from "../assets/Industry_corner/Non-Linear Vector Network Analyzer.jpg";
-import High_Power_Device_Characterization from "../assets/Industry_corner/High Power Device Characterization.png";
+
+
+
 // Import sponsor logos
 import DST from "../assets/Home/DST_logo.png";
 import Wipro from "../assets/Home/Wipro_logo.png";
@@ -34,12 +27,12 @@ import Keysight from "../assets/Home/KeySight_logo.png";
 
 const industrySections = [
   {
-    title: "Industry Collaboration",
+    title: "Industry Collaboration & Tech Transfers",
     icon: <Building2 className="w-6 h-6" />,
     color: "from-blue-600 to-indigo-700",
     content: [
       {
-        heading: "Wipro & Joint Partners",
+        heading: "Wipro Ltd.",
         text: "In partnership with Wipro, we have developed high-efficiency Doherty Power Amplifier prototypes for 5G bands (n8, n78, and n106). This collaboration aimed at industrial-grade performance in terms of spectral efficiency and compactness. Outcomes include 4 Patents (2 Indian, 2 US), 5 IEEE Conference Papers, and 2 Technology Transfers.",
         highlights: ["4 Patents", "5 IEEE Papers", "2 Tech Transfers"],
         images: [
@@ -87,7 +80,7 @@ const industrySections = [
     ],
   },
   {
-    title: "Opportunities to Industries",
+    title: "Opportunities for Industry Collaboration",
     icon: <Handshake className="w-6 h-6" />,
     color: "from-blue-600 to-indigo-700",
     content: [
@@ -206,7 +199,7 @@ const IndustryCorner = () => {
       id="main-content"
       className="min-h-screen bg-gradient-to-b from-white to-blue-50"
     >
-      {/* Hero Section - Publications Style */}
+      {/* Hero Section */}
       <div className="pt-24 pb-12">
         <div className="text-center">
           <h1
@@ -266,7 +259,7 @@ const IndustryCorner = () => {
                         {section.title}
                       </h2>
                       <p className="text-white/80 mt-2">
-                        {section.title === "Industry Collaboration" &&
+                        {section.title === "Industry Collaboration & Tech Transfers" &&
                           "Strategic partnerships driving innovation"}
 
                         {section.title === "Opportunities to Industries" &&
@@ -345,7 +338,7 @@ const IndustryCorner = () => {
             </div>
           </div>
         </section>
-        {/* Sponsors Section - Added before Get In Touch */}
+        {/* Sponsors Section*/}
         <section className="mt-20 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">

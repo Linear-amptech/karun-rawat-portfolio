@@ -1,48 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Linkedin } from "lucide-react";
+import { getAllNews } from "../services/getData";
 
-// Import your actual images
+// images
 import professorImage from "../assets/karun.jpeg";
 import iitBuildingImage from "../assets/back.png";
 
 const ProfessorProfile = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [latestNews, setLatestNews] = useState([]);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Fetch latest news
+    async function fetchNews() {
+      const newsRes = await getAllNews();
+      if (!newsRes.error && newsRes.data) {
+        // Get top 3 news items
+        const top3News = newsRes.data.slice(0, 3).map((item, index) => ({
+          id: index + 1,
+          title: item.content,
+          summary: item.content,
+        }));
+        setLatestNews(top3News);
+      }
+    }
+    
+    fetchNews();
   }, []);
-
-  // Mock data for latest news
-  const latestNews = [
-    {
-      id: 1,
-      title: "Dr.Karun Rawat successfully conducted a 3-day BEL Workshop on High Efficiency Power Amplifier for Bharat Electronics Limited, Bengaluru from 26 July 2021 to 28 July 2021.",
-      summary:
-        "Karun Rawat successfully conducted a 3-day BEL Workshop on High Efficiency Power Amplifier for Bharat Electronics Limited, Bengaluru from 26 July 2021 to 28 July 2021.",
-    },
-    {
-      id: 2,
-      title: "Y. Mary Asha Latha has been selected for Post-Doctoral Fellowship in Instituto de Telecomunicações, Aveiro, Portugal. Congratulations to Dr. Y. Mary Asha Latha for the achievement.",
-      summary:
-        "Y. Mary Asha Latha has been selected for Post-Doctoral Fellowship in Instituto de Telecomunicações, Aveiro, Portugal. Congratulations to Dr. Y. Mary Asha Latha for the achievement.",
-    },
-    {
-      id: 3,
-      title: "IIT Roorkee Inaugurates New Research Lab",
-      summary:
-        "The new Centre for Semiconductor Design & Technology research lab, led by Professor Rawat, was officially inaugurated by the institute's director.",
-    },
-    {
-      id: 4,
-      title: "Ekta Aggrawal has been placed at IISC Bangalore. Congratulations to Dr. Ekta Aggrawal",
-      summary:
-        "Ekta Aggrawal has been placed at IISC Bangalore. Congratulations to Dr. Ekta Aggrawal",
-    },
-  ];
 
   return (
     <div className="bg-slate-950 font-sans text-gray-200 antialiased min-h-screen lg:h-screen lg:overflow-hidden">
-      {/* Main Layout - Single screen viewport */}
+    
       <main className="relative w-full min-h-screen lg:h-full flex flex-col overflow-y-auto lg:overflow-hidden">
         {/* Background Image of IIT Roorkee */}
         <div className="absolute inset-0">
@@ -54,7 +44,7 @@ const ProfessorProfile = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/60 to-slate-950/30"></div>
         </div>
 
-        {/* Hero Section - Compact and centered */}
+        {/* Hero Section*/}
         <section className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 lg:pr-80 py-8 lg:py-4 mt-16 sm:mt-20 lg:mt-8">
           <div
             className={`w-11/12 max-w-7xl transition-all duration-1000 ${
@@ -64,9 +54,9 @@ const ProfessorProfile = () => {
             }`}
           >
             <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
-              {/* Professor Photo - Circular */}
+              {/* Professor Photo  */}
               <div className="flex-shrink-0 group flex flex-col items-center">
-                {/* Professor Photo - Circular */}
+                {/* Professor Photo  */}
                 <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-60 lg:h-60 rounded-full overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500 group-hover:shadow-yellow-500/30">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-500 via-amber-500 to-orange-500 p-1.5 group-hover:p-2 transition-all duration-300">
                     <div className="w-full h-full rounded-full overflow-hidden">
@@ -80,7 +70,7 @@ const ProfessorProfile = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
                 </div>
 
-                {/* LinkedIn Button - Centered Below Photo */}
+                {/* LinkedIn Button */}
                 <a
                   href="https://www.linkedin.com/in/karun-rawat-b732784b/"
                   target="_blank"
@@ -97,7 +87,7 @@ const ProfessorProfile = () => {
                 </a>
               </div>
 
-              {/* Text Section - Compact with translucent background */}
+              {/* Text Section  */}
               <div className="space-y-4 text-center lg:text-left max-w-4xl">
                 <div className="bg-slate-950/40 rounded-2xl p-6 border border-amber-500/20 shadow-xl">
                   <div className="space-y-2">
@@ -107,16 +97,16 @@ const ProfessorProfile = () => {
                     <div className="w-20 h-1 bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-500 rounded-full mx-auto lg:mx-0"></div>
                   </div>
 
-                  <div className="space-y-3 mt-4">
+                  <div className="space-y-2.5 mt-5">
                     <div className="group cursor-default">
-                      <p className="text-lg sm:text-lg lg:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 leading-snug hover:from-amber-300 hover:to-orange-300 transition-all duration-300">
+                      <p className="text-lg sm:text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 leading-snug hover:from-amber-300 hover:to-orange-300 transition-all duration-300">
                         Head, Centre for Semiconductor Design & Technology
                       </p>
                       <div className="w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-amber-400 to-transparent transition-all duration-500 mt-1"></div>
                     </div>
 
                     <div className="group cursor-default">
-                      <p className="text-base sm:text-lg lg:text-xl font-semibold text-amber-100 hover:text-white transition-colors duration-300">
+                      <p className="text-base sm:text-lg lg:text-xl font-semibold text-amber-100 hover:text-white transition-colors duration-300 leading-snug">
                         Professor, Department of Electronics & Communication
                         Engineering
                       </p>
@@ -124,14 +114,14 @@ const ProfessorProfile = () => {
                     </div>
 
                     <div className="group cursor-default">
-                      <p className="text-sm sm:text-lg lg:text-xl text-amber-200 font-medium hover:text-amber-100 transition-colors duration-300">
+                      <p className="text-base sm:text-lg lg:text-xl text-amber-200 font-medium hover:text-amber-100 transition-colors duration-300 leading-snug">
                         Indian Institute of Technology Roorkee
                       </p>
                       <div className="w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-amber-300 to-transparent transition-all duration-500 mt-1"></div>
                     </div>
 
                     <div className="group cursor-default">
-                      <p className="text-sm sm:text-base lg:text-lsm:text-lg lg:text-xl text-amber-300 font-semibold hover:text-amber-200 transition-colors duration-300">
+                      <p className="text-base sm:text-lg lg:text-xl text-amber-300 font-semibold hover:text-amber-200 transition-colors duration-300 leading-snug">
                         Chairman, Linear Amplifier Technologies & Services Pvt.
                         Ltd.
                       </p>
@@ -225,17 +215,26 @@ const ProfessorProfile = () => {
           <div className="max-w-7xl mx-auto bg-slate-900/60 backdrop-blur-sm border border-amber-500/30 rounded-xl overflow-hidden">
             <div className="py-2">
               <div className="w-full whitespace-nowrap animate-marquee">
-                {latestNews.concat(latestNews).map((news, index) => (
-                  <span
-                    key={index}
-                    className="inline-block px-6 text-xs sm:text-sm font-semibold text-amber-200 hover:text-amber-100 transition-colors duration-300 cursor-default"
-                  >
+                {latestNews.length > 0 ? (
+                  latestNews.concat(latestNews).map((news, index) => (
+                    <span
+                      key={index}
+                      className="inline-block px-6 text-xs sm:text-sm font-semibold text-amber-200 hover:text-amber-100 transition-colors duration-300 cursor-default"
+                    >
+                      <span className="text-amber-400 pr-2 animate-pulse">
+                        ✦ LATEST:
+                      </span>{" "}
+                      {news.title}
+                    </span>
+                  ))
+                ) : (
+                  <span className="inline-block px-6 text-xs sm:text-sm font-semibold text-amber-200">
                     <span className="text-amber-400 pr-2 animate-pulse">
-                      ✦ LATEST:
+                      ✦
                     </span>{" "}
-                    {news.title}
+                    Loading latest news...
                   </span>
-                ))}
+                )}
               </div>
             </div>
           </div>

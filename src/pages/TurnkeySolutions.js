@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from "react";
-import { X, Zap, Radio, Antenna, Wifi, MapPin, Plane, Brain, ZoomIn } from "lucide-react";
+import { X, Zap, Radio, Antenna, Wifi, MapPin, Plane, Brain, ZoomIn, Satellite } from "lucide-react";
+
 
 // Import all images directly
 import L_Band_Power_Amplifier from "../assets/Industry_corner/L-Band Power Amplifier (100W).png";
@@ -11,7 +12,7 @@ import sdr_dpd_setup from "../assets/turn_key_solution/sdr_dpd_setup.png";
 import sdr_dpd_architecture from "../assets/turn_key_solution/sdr_dpd_architecture.png";
 import active_antenna_power_combining_layout from "../assets/turn_key_solution/active_antenna_power_combining_layout.png";
 import active_antenna_chip_transition from "../assets/turn_key_solution/active_antenna_chip_transition.png";
-import active_antenna_s_parameters from "../assets/turn_key_solution/active_antenna_s_parameters.png";
+
 import lora_mesh_network_diagram from "../assets/turn_key_solution/lora_mesh_network_diagram.png";
 import lora_asset_tracking from "../assets/turn_key_solution/lora_asset_tracking.png";
 import lora_hardware_and_app from "../assets/turn_key_solution/lora_hardware_and_app.png";
@@ -27,8 +28,130 @@ import anetenna_Architecture from "../assets/turn_key_solution/Architecture of t
 import antenna_fabricated_prototype_AMN from "../assets/turn_key_solution/Fabricated prototype of the AMN-integrated antenna.png";
 import Proposed_non_Foster from "../assets/turn_key_solution/Proposed non-Foster AMN de-embedded in the proposed monopole..png";
 
+
+// ================= STICKY NAVIGATION =================
+const StickyNavigation = ({ activeSection }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const navItems = [
+    { id: "top", label: "Overview", icon: Satellite },
+    { id: "Pa-Modules", label: "PA Modules", icon: Radio },
+    { id: "ris", label: "RIS", icon: Zap },
+    { id: "sdr", label: "SDR Solutions", icon: Radio },
+    { id: "active-antenna", label: "Active Antennas", icon: Antenna },
+    { id: "packaging", label: "Packaging", icon: Antenna },
+    { id: "lora", label: "LoRa", icon: Wifi },
+    { id: "rf-location", label: "RF Location", icon: MapPin },
+    { id: "rf-drone", label: "RF Drone Detection", icon: Plane },
+    { id: "ai", label: "AI Solutions", icon: Brain }
+  ];
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  return (
+    <>
+      {/* Desktop Navigation */}
+      <nav className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-40 max-h-[90vh] overflow-y-auto">
+        <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 p-4 w-64">
+          <div className="mb-4 pb-3 border-b border-gray-200">
+            <h3 className="font-bold text-sm text-gray-700 uppercase tracking-wide">
+              Navigation
+            </h3>
+          </div>
+          
+          <ul className="space-y-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+              
+              return (
+                <li key={item.id}>
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 text-left group ${
+                      isActive
+                        ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md"
+                        : "hover:bg-gray-100 text-gray-600"
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-white" : "text-gray-400 group-hover:text-blue-500"}`} />
+                    <span className={`text-sm font-medium ${isActive ? "text-white" : ""}`}>
+                      {item.label}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </nav>
+
+      {/* Mobile Navigation - Floating Button */}
+      <div className="lg:hidden fixed bottom-6 right-6 z-40">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110"
+        >
+          <Zap className="w-6 h-6" />
+        </button>
+
+        {isExpanded && (
+          <div className="absolute bottom-16 right-0 bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 p-4 w-64 max-h-96 overflow-y-auto">
+            <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-200">
+              <h3 className="font-bold text-sm text-gray-700">Navigate</h3>
+              <button
+                onClick={() => setIsExpanded(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            
+            <ul className="space-y-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeSection === item.id;
+                
+                return (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => {
+                        scrollToSection(item.id);
+                        setIsExpanded(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 text-left ${
+                        isActive
+                          ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                          : "hover:bg-gray-100 text-gray-600"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+
 const solutionsData = [
-     {
+  {
     id: "Pa-Modules",
     title: "R&D on Power Amplifier Modules",
     icon: Radio,
@@ -81,7 +204,7 @@ const solutionsData = [
       glow: "shadow-indigo-200"
     }
   },
-   {
+  {
     id: "active-antenna",
     title: "R&D on Active Antennas",
     icon: Antenna,
@@ -107,7 +230,6 @@ const solutionsData = [
     images: [
       { src: active_antenna_power_combining_layout, alt: "Active Antenna Power Combining Layout", label: "2-Way Power Combiner" },
       { src: active_antenna_chip_transition, alt: "Active Antenna Chip to PCB Transition", label: "Chip-to-PCB Transition" },
-     
     ],
     theme: {
       bg: "bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50",
@@ -190,11 +312,47 @@ const solutionsData = [
   },
 ];
 
+
 const TurnkeySolutions = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [activeSection, setActiveSection] = useState("top");
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Scroll spy effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        "top",
+        "Pa-Modules",
+        "ris",
+        "sdr",
+        "active-antenna",
+        "packaging",
+        "lora",
+        "rf-location",
+        "rf-drone",
+        "ai"
+      ];
+      
+      const scrollPosition = window.scrollY + 150;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Call once on mount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
 
   const ImageModal = ({ image, onClose }) => (
     <div 
@@ -223,149 +381,155 @@ const TurnkeySolutions = () => {
     </div>
   );
 
-const ImageGallery = ({ images, theme, sharedLabel }) => {
-  const getGridClass = (count) => {
-    if (count === 1) return "grid-cols-1 max-w-2xl mx-auto";
-    if (count === 2) return "grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-8";
-    return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
+
+  const ImageGallery = ({ images, theme, sharedLabel }) => {
+    const getGridClass = (count) => {
+      if (count === 1) return "grid-cols-1 max-w-2xl mx-auto";
+      if (count === 2) return "grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-8";
+      return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
+    };
+
+    return (
+      <div className="mt-10">
+        {/* Images grid */}
+        <div className={`grid ${getGridClass(images.length)}`}>
+          {images.map((image, index) => (
+            <div
+              key={index}
+              onClick={() => setSelectedImage(image)}
+              className={`group relative overflow-hidden rounded-2xl ${theme.border} border-2 cursor-pointer transform hover:scale-[1.02] transition-all duration-500 hover:shadow-2xl ${theme.glow} bg-white`}
+            >
+              <div className="relative bg-gray-50 p-4">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-auto object-contain rounded-lg transition-transform duration-500 group-hover:scale-[1.03]"
+                  style={{ minHeight: '200px', maxHeight: '400px' }}
+                />
+                <div className="absolute inset-4 bg-black/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                    <ZoomIn className="w-6 h-6 text-gray-700" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Only show image.label if sharedLabel is NOT provided */}
+              {!sharedLabel && image.label && (
+                <div className="p-4 bg-white border-t border-gray-100">
+                  <h3 className={`font-semibold text-sm ${theme.accent} text-center leading-tight`}>
+                    {image.label}
+                  </h3>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* If sharedLabel is provided, show it ONCE below the grid */}
+        {sharedLabel && (
+          <div className="mt-6 text-center">
+            <h3 className={`font-semibold text-base ${theme.accent}`}>
+              {sharedLabel}
+            </h3>
+          </div>
+        )}
+      </div>
+    );
   };
 
+
   return (
-    <div className="mt-10">
-      {/* Images grid */}
-      <div className={`grid ${getGridClass(images.length)}`}>
-        {images.map((image, index) => (
-          <div
-            key={index}
-            onClick={() => setSelectedImage(image)}
-            className={`group relative overflow-hidden rounded-2xl ${theme.border} border-2 cursor-pointer transform hover:scale-[1.02] transition-all duration-500 hover:shadow-2xl ${theme.glow} bg-white`}
-          >
-            <div className="relative bg-gray-50 p-4">
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-auto object-contain rounded-lg transition-transform duration-500 group-hover:scale-[1.03]"
-                style={{ minHeight: '200px', maxHeight: '400px' }}
-              />
-              <div className="absolute inset-4 bg-black/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                  <ZoomIn className="w-6 h-6 text-gray-700" />
-                </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      {/* Sticky Navigation */}
+      <StickyNavigation activeSection={activeSection} />
+
+      {/* Main Content - Added padding for desktop nav */}
+      <div id="main-content" className="lg:ml-80 lg:mr-8">
+        <div className="container mx-auto px-6 lg:px-12 py-16">
+          {/* Header */}
+          <header id="top" className="text-center mb-20">
+            <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full mb-6">
+              <div className="bg-white rounded-full px-6 py-2">
+                <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Advanced Technology Solutions
+                </span>
               </div>
             </div>
-
-            {/* Only show image.label if sharedLabel is NOT provided */}
-            {!sharedLabel && image.label && (
-              <div className="p-4 bg-white border-t border-gray-100">
-                <h3 className={`font-semibold text-sm ${theme.accent} text-center leading-tight`}>
-                  {image.label}
-                </h3>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* If sharedLabel is provided, show it ONCE below the grid */}
-      {sharedLabel && (
-        <div className="mt-6 text-center">
-          <h3 className={`font-semibold text-base ${theme.accent}`}>
-            {sharedLabel}
-          </h3>
-        </div>
-      )}
-    </div>
-  );
-};
-
-  return (
-    <div id="main-content"
-     className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-      <div className="container mx-auto px-6 lg:px-12 py-16">
-        {/* Header */}
-        <header className="text-center mb-20">
-          <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full mb-6">
-            <div className="bg-white rounded-full px-6 py-2">
-              <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Advanced Technology Solutions
+            
+            <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
+                Turn-Key Solutions
               </span>
-            </div>
+            </h1>
+            
+            <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+              Innovative, end-to-end solutions for the most demanding wireless applications and next-generation systems.
+            </p>
+            
+            <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+          </header>
+
+          {/* Solutions */}
+          <div className="space-y-24">
+            {solutionsData.map((solution, index) => {
+              const Icon = solution.icon;
+              return (
+                <section
+                  key={solution.id}
+                  id={solution.id}
+                  className={`relative overflow-hidden rounded-3xl ${solution.theme.bg} ${solution.theme.border} border-2 shadow-xl hover:shadow-2xl transition-all duration-500`}
+                >
+                  {/* Background Pattern */}
+                  <div className="absolute inset-0 opacity-5">
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
+                      backgroundSize: '30px 30px'
+                    }} />
+                  </div>
+
+                  <div className="relative p-8 lg:p-12">
+                    {/* Section Header */}
+                    <div className="flex items-center gap-6 mb-8">
+                      <div className={`p-4 rounded-2xl ${solution.theme.button} shadow-lg transform hover:scale-110 transition-transform duration-300`}>
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h2 className={`text-3xl lg:text-4xl font-bold ${solution.theme.accent} mb-3`}>
+                          {solution.title}
+                        </h2>
+                        <div className={`h-1 w-20 ${solution.theme.button} rounded-full`} />
+                      </div>
+                      <div className="hidden lg:block text-8xl font-bold text-black/5">
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="mb-8">
+                      <p className="text-gray-700 text-lg leading-relaxed max-w-5xl">
+                        {solution.content}
+                      </p>
+                    </div>
+
+                    {/* Images */}
+                    <ImageGallery 
+                      images={solution.images} 
+                      theme={solution.theme} 
+                      sharedLabel={solution.sharedLabel}
+                    />
+                  </div>
+                </section>
+              );
+            })}
           </div>
-          
-          <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
-              Turn-Key Solutions
-            </span>
-          </h1>
-          
-          <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
-            Innovative, end-to-end solutions for the most demanding wireless applications and next-generation systems.
-          </p>
-          
-          <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
-        </header>
 
-        {/* Solutions */}
-        <div className="space-y-24">
-          {solutionsData.map((solution, index) => {
-            const Icon = solution.icon;
-            return (
-              <section
-                key={solution.id}
-                id={solution.id}
-                className={`relative overflow-hidden rounded-3xl ${solution.theme.bg} ${solution.theme.border} border-2 shadow-xl hover:shadow-2xl transition-all duration-500`}
-              >
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-5">
-                  <div className="absolute inset-0" style={{
-                    backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
-                    backgroundSize: '30px 30px'
-                  }} />
-                </div>
-
-                <div className="relative p-8 lg:p-12">
-                  {/* Section Header */}
-                  <div className="flex items-center gap-6 mb-8">
-                    <div className={`p-4 rounded-2xl ${solution.theme.button} shadow-lg transform hover:scale-110 transition-transform duration-300`}>
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h2 className={`text-3xl lg:text-4xl font-bold ${solution.theme.accent} mb-3`}>
-                        {solution.title}
-                      </h2>
-                      <div className={`h-1 w-20 ${solution.theme.button} rounded-full`} />
-                    </div>
-                    <div className="hidden lg:block text-8xl font-bold text-black/5">
-                      {String(index + 1).padStart(2, '0')}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="mb-8">
-                    <p className="text-gray-700 text-lg leading-relaxed max-w-5xl">
-                      {solution.content}
-                    </p>
-                  </div>
-
-                  {/* Images */}
-                 <ImageGallery 
-  images={solution.images} 
-  theme={solution.theme} 
-  sharedLabel={solution.sharedLabel}
-/>
-
-                </div>
-              </section>
-            );
-          })}
-        </div>
-
-        {/* Footer */}
-        <div className="mt-24 text-center">
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"></div>
-          <p className="text-gray-500 text-lg">
-            Driving innovation in wireless communication technology
-          </p>
+          {/* Footer */}
+          <div className="mt-24 text-center">
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"></div>
+            <p className="text-gray-500 text-lg">
+              Driving innovation in wireless communication technology
+            </p>
+          </div>
         </div>
       </div>
 
@@ -379,5 +543,6 @@ const ImageGallery = ({ images, theme, sharedLabel }) => {
     </div>
   );
 };
+
 
 export default TurnkeySolutions;

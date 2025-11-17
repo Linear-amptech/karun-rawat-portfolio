@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ExternalLink, BookOpen, Award, Users, Briefcase, MapPin, Calendar, Building2 } from "lucide-react";
+import linear_amptech_logo from "../assets/Home/amptech_logo.png";
 
-// Mock Lottie component since we don't have the actual library
-const Lottie = ({ options, height, width }) => (
-  <div 
-    className="animate-pulse bg-blue-100 rounded-full flex items-center justify-center"
-    style={{ height, width }}
-  >
-    <div className="w-8 h-8 bg-blue-300 rounded-full animate-bounce"></div>
-  </div>
-);
 
-// Mock logo - replace with actual import
-const amptech_logo = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iIzMzNzNkYyIvPgo8dGV4dCB4PSIyMCIgeT0iMjQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BPC90ZXh0Pgo8L3N2Zz4K";
-
+const amptech_logo = linear_amptech_logo;
 const AboutMe = () => {
   const [activeSection, setActiveSection] = useState('biography');
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
@@ -278,9 +268,9 @@ const AboutMe = () => {
 
   return (
     <div id="main-content" className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
-      {/* Enhanced Header */}
+      {/* Header */}
       <div className="relative overflow-hidden pt-24 pb-16">
-        {/* Background decoration */}
+        {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-emerald-600/5"></div>
         <div className="absolute top-0 left-1/4 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl"></div>
         <div className="absolute top-0 right-1/4 w-72 h-72 bg-emerald-200/20 rounded-full blur-3xl"></div>
@@ -301,7 +291,7 @@ const AboutMe = () => {
               Professional Profile
             </h1>
             
-            {/* Enhanced underline effect */}
+            {/* underline effect */}
             <div className={`
               h-2 bg-gradient-to-r from-blue-400 via-teal-400 to-emerald-400 rounded-full
               transition-all duration-700 ease-out
@@ -318,7 +308,7 @@ const AboutMe = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Enhanced Navigation */}
+        {/* Navigation */}
         <div className="flex flex-wrap justify-center gap-2 mb-12 bg-white rounded-2xl p-2 shadow-lg border border-gray-100">
           {sections.map((section) => (
             <button
@@ -336,14 +326,10 @@ const AboutMe = () => {
           ))}
         </div>
 
-        {/* Enhanced Main Content */}
+        {/* Main Content */}
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-16">
-          {isLoader ? (
-            <div className="flex justify-center p-16">
-              <Lottie options={loaderSetting} height={120} width={120} />
-            </div>
-          ) : (
-            <>
+
+            
               {/* Biography Section */}
               <div className={`transition-all duration-500 ease-in-out ${activeSection === 'biography' ? 'opacity-100 p-8 md:p-12' : 'opacity-0 max-h-0 overflow-hidden'}`}>
                 <div className="flex items-center gap-4 mb-8 pb-6 border-b-2 border-gradient-to-r from-blue-200 to-emerald-200">
@@ -373,7 +359,7 @@ const AboutMe = () => {
                     <div className="grid md:grid-cols-2 gap-6">
                       <ContentItem
                         title="Research Excellence"
-                        description="Over 100+ publications in premier journals and conferences, 8 patents, and several authored books and book chapters in the field of RF and microwave engineering."
+                        description="Over 100+ publications in premier journals and conferences, 10 patents, and several authored books and book chapters in the field of RF and microwave engineering."
                         type="award"
                         icon={<Award size={20} />}
                       />
@@ -567,8 +553,8 @@ const AboutMe = () => {
   {/* --- End Industrial Leadership Section --- */}
 </div>
 
-            </>
-          )}
+            
+          
         </div>
 
         {/* Enhanced Footer */}

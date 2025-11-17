@@ -8,18 +8,13 @@ import {
   TrendingUp,
   Settings,
   ChevronRight,
-  Mail,
   ExternalLink,
   Users,
   Target,
   Lightbulb,
   Globe,
-  ArrowRight,
-  Star,
   Building,
   GraduationCap,
-  Play,
-  Download,
   BookOpen,
   Microscope,
   Wifi,
@@ -29,11 +24,10 @@ import {
   Book,
   Send,
   AlertCircle,
-  CheckCircle,
-  X,
+
   ZoomIn,
   ChevronLeft,
-  ChevronRigh,
+  Quote
 } from "lucide-react";
 
 // Import logos for collaborators
@@ -55,9 +49,8 @@ import uhfPowerAmp from "../assets/ResearchArea/Ultra-Wideband UHF Power Amplifi
 import levelTransformation from "../assets/ResearchArea/6-3 Level  transformation with measurement.png";
 import outphasingAmp from "../assets/ResearchArea/Outphasing_Amplifier_Implemented.png";
 import hardwareSetup from "../assets/ResearchArea/Hardware setup.png";
-import digitalTransmitters from "../assets/ResearchArea/Digital TransmittersMeasurement.png";
-import analogLinearizer from "../assets/ResearchArea/Analog linearizer for Satellite Communication .png";
-import testBed from "../assets/Industry_corner/Test-Bed for Characterization & Non-linear Behavioral Modeling.png";
+
+
 import vectorAnalyzer from "../assets/Industry_corner/Non-Linear Vector Network Analyzer.jpg";
 import powerDevice from "../assets/Industry_corner/High Power Device Characterization.jpg";
 
@@ -403,6 +396,117 @@ export default function StudentProspectus() {
     setCurrentIndex(newIndex);
     setSelectedImage(equipmentData[newIndex]);
   };
+
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+
+  const alumni = [
+    {
+      name: "Dr. Y. Mary Asha Latha",
+      degree: "PhD, 2021",
+      institution: "IIT Roorkee",
+      position: "Assistant Professor, IIT(ISM) Dhanbad",
+      feedback: "The hands-on experience I gained was invaluable. The research environment pushed me to think critically and innovate. The mentorship I received helped shape my academic career.",
+      gradient: "from-blue-50 to-indigo-50",
+      iconGradient: "from-blue-400 to-indigo-500",
+      textColor: "text-blue-700"
+    },
+    {
+      name: "Dr. Nishant Kumar",
+      degree: "PhD, 2021",
+      institution: "IIT Roorkee",
+      position: "Principal Engineer, Texas Instruments Bangalore",
+      feedback: "The freedom to explore new ideas and direct path to commercialization through the lab was unique. The cutting-edge research facilities prepared me perfectly for industry challenges.",
+      gradient: "from-green-50 to-emerald-50",
+      iconGradient: "from-green-400 to-emerald-500",
+      textColor: "text-green-700"
+    },
+    {
+      name: "Avinash Singh",
+      degree: "PhD, Ongoing",
+      institution: "IIT Roorkee",
+      position: "Global Foundries, Bangalore",
+      feedback: "Working in this lab has given me exposure to real-world semiconductor challenges. The collaborative environment and state-of-the-art facilities have been instrumental in my growth.",
+      gradient: "from-purple-50 to-pink-50",
+      iconGradient: "from-purple-400 to-pink-500",
+      textColor: "text-purple-700"
+    },
+    {
+      name: "Dr. Ekta Aggrawal",
+      degree: "PhD, 2021",
+      institution: "IIT Roorkee",
+      position: "IISc Bangalore",
+      feedback: "The research methodology and experimental approach I learned here became the foundation of my academic pursuits. The lab's emphasis on innovation and excellence is unmatched.",
+      gradient: "from-orange-50 to-red-50",
+      iconGradient: "from-orange-400 to-red-500",
+      textColor: "text-orange-700"
+    },
+    {
+      name: "Dr. Sujata Ghosh",
+      degree: "PhD, 2020",
+      institution: "IIT Roorkee",
+      position: "Global Foundries, Bengaluru",
+      feedback: "The interdisciplinary approach and industry connections provided here made my transition to the semiconductor industry seamless. I'm grateful for the comprehensive training.",
+      gradient: "from-cyan-50 to-blue-50",
+      iconGradient: "from-cyan-400 to-blue-500",
+      textColor: "text-cyan-700"
+    },
+    {
+      name: "Dr. Hemant Kumar Singhal",
+      degree: "PhD, 2020",
+      institution: "IIT Roorkee",
+      position: "Staff Engineer, Axiro Semiconductor, Bengaluru",
+      feedback: "The practical problem-solving skills and deep technical knowledge I gained here have been pivotal in my professional journey. The lab truly bridges academia and industry.",
+      gradient: "from-indigo-50 to-purple-50",
+      iconGradient: "from-indigo-400 to-purple-500",
+      textColor: "text-indigo-700"
+    },
+    {
+      name: "Dr. Chetan Pathak",
+      degree: "PhD, 2019",
+      institution: "IIT Roorkee",
+      position: "Assistant Professor, RJIT, Gwalior",
+      feedback: "The research culture here taught me not just technical skills but also how to mentor and guide students. The experience shaped my teaching philosophy and research direction.",
+      gradient: "from-pink-50 to-rose-50",
+      iconGradient: "from-pink-400 to-rose-500",
+      textColor: "text-pink-700"
+    },
+    {
+      name: "Dr. Ayushi Barthwal",
+      degree: "PhD, 2018",
+      institution: "IIT Delhi",
+      position: "Assistant Professor, JNU, New Delhi",
+      feedback: "The collaborative research environment and access to advanced equipment prepared me exceptionally well for an academic career. The skills I developed here continue to benefit me today.",
+      gradient: "from-emerald-50 to-green-50",
+      iconGradient: "from-emerald-400 to-green-500",
+      textColor: "text-emerald-700"
+    }
+  ]
+
+  useEffect(() => {
+    if (!isAutoPlaying) return
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % alumni.length)
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [isAutoPlaying, alumni.length])
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % alumni.length)
+    setIsAutoPlaying(false)
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + alumni.length) % alumni.length)
+    setIsAutoPlaying(false)
+  }
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index)
+    setIsAutoPlaying(false)
+  }
+
+  const current = alumni[currentIndex]
   {
     /* opportunity section*/
   }
@@ -571,7 +675,7 @@ export default function StudentProspectus() {
             {[
               {
                 label: "Active Projects",
-                value: "15+",
+                value: "6+",
                 icon: <Rocket className="w-5 h-5" />,
               },
               {
@@ -581,7 +685,7 @@ export default function StudentProspectus() {
               },
               {
                 label: "Patents Filed and Granted",
-                value: "8",
+                value: "10+",
                 icon: <Award className="w-5 h-5" />,
               },
               {
@@ -943,61 +1047,88 @@ export default function StudentProspectus() {
       </section>
 
       {/* Alumni Success Section */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-4">
-              <Users className="w-4 h-4 mr-2" />
-              Alumni Success
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              Launch Your Career
-            </h2>
-            <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-              Our researchers are highly sought after by top academic
-              institutions and leading companies in semiconductor,
-              telecommunication sectors.
-            </p>
+    <section className="py-20 px-6 bg-white">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-4">
+            <Users className="w-4 h-4 mr-2" />
+            Alumni Success
           </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+            Launch Your Career
+          </h2>
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto">
+            Our researchers are highly sought after by top academic
+            institutions and leading companies in semiconductor and
+            telecommunication sectors.
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <div className="group p-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-500 border border-blue-100 hover:border-blue-200">
-              <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        {/* Carousel Container */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Main Card */}
+          <div className={`group relative p-12 bg-gradient-to-br ${current.gradient} rounded-3xl shadow-2xl transition-all duration-700 border border-opacity-20`}>
+            {/* Quote Icon */}
+            <div className="absolute top-8 left-8 opacity-10">
+              <Quote className="w-24 h-24 text-gray-800" />
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10">
+              {/* Icon Badge */}
+              <div className={`w-20 h-20 bg-gradient-to-r ${current.iconGradient} rounded-full mb-6 flex items-center justify-center shadow-lg mx-auto`}>
                 <GraduationCap className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-2 text-blue-700">
-                Dr. Y. Mary Asha Latha | PhD, 2021
-              </h3>
-              <p className="text-gray-700 italic mb-4">
-                "The hands-on experience I gained was invaluable. I now work as
-                a Assistant Professor at IIT(ISM) Dhanbad."
-              </p>
-              <div className="text-sm text-green-600 font-semibold">
-                Now: Assistant Professor, IIT(ISM) Dhanbad
-              </div>
-            </div>
 
-            <div className="group p-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-500 border border-green-100 hover:border-green-200">
-              <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <Users className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-green-700">
-                Dr. Nishant Kumar | Phd, 2021
-              </h3>
-              <p className="text-gray-700 italic mb-4">
-                "The freedom to explore new ideas and direct path to
-                commercialization through the lab was unique. I am now working
-                as a Principle Engg. Design Enablement Texas Instruments (TI)
-                Bangalore."
+              {/* Feedback */}
+              <p className="text-gray-700 text-lg italic text-center mb-8 leading-relaxed max-w-3xl mx-auto">
+                "{current.feedback}"
               </p>
-              <div className="text-sm text-green-600 font-semibold">
-                Now: Principle Engineer
+
+              {/* Divider */}
+              <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8"></div>
+
+              {/* Alumni Info */}
+              <div className="text-center">
+                <h3 className={`text-2xl font-bold mb-2 ${current.textColor}`}>
+                  {current.name}
+                </h3>
+                <p className="text-gray-700 font-medium mb-2">
+                  {current.degree} | {current.institution}
+                </p>
+                <div className="inline-block px-4 py-2 bg-white/50 rounded-full">
+                  <p className="text-sm text-green-700 font-semibold">
+                    Now: {current.position}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Collaborators */}
-          <div className="text-center">
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110 group"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-6 h-6 text-gray-700 group-hover:text-blue-600" />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110 group"
+            aria-label="Next"
+          >
+            <ChevronRight className="w-6 h-6 text-gray-700 group-hover:text-blue-600" />
+          </button>
+
+          
+
+        </div>
+        
+                  {/* Collaborators */}
+          <div className="text-center margin-top-16 mt-20">
             <h3 className="text-2xl font-bold mb-8 text-gray-900">
               Our Key Collaborators
             </h3>
@@ -1019,8 +1150,8 @@ export default function StudentProspectus() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
+      </div>
+    </section>
 
       {/* Call to Action Section */}
       <section className="py-24 px-6 bg-gradient-to-br from-blue-50 to-indigo-50 relative overflow-hidden">

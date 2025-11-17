@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { X, ZoomIn, Zap, Satellite, Cpu, Wifi, ChevronDown, Radio, Antenna, MapPin, Plane, Brain } from "lucide-react";
 
+
 // Import all assets
-import bandwidthChart from "../assets/ResearchArea/ContinuumOfClassBandwidth.png";
+
 import classE from "../assets/Technology/Class_E.png";
 import classF from "../assets/Technology/Class_F.jpg";
 import classD from "../assets/Technology/Class_D.png";
@@ -14,47 +15,25 @@ import Extended_Class_F_Conti from "../assets/Technology/Extended_Class_F_Conti.
 import Extended_Class_E_Conti from "../assets/Technology/Extended_Class_E_Conti.png";
 import Level_6_3 from "../assets/ResearchArea/6-3 Level  transformation with measurement.png";
 
+
 import Type_2_Sequential_operation_img from "../assets/Technology/Type_2_Sequential_operation_img.png";
 import Device_size_optimisation from "../assets/Technology/Device_size_optimisation.png";
 import New_Load_Combiners from "../assets/ResearchArea/New_Load_Combiners.png";
 
+
 import Outphasing_Amplifier_Implemented_top_view from   "../assets/ResearchArea/Outphasing_Amplifier_Implemented_top_view.png";
 import Outphasing_Amplifier_Implemented from "../assets/ResearchArea/Outphasing_Amplifier_Implemented.png";
 
-import TwoPAsPullLoad from "../assets/ResearchArea/Two_PAs_pull_the_load_of_Each_other.png";
-import ReconfigurableDualBandSchematic from "../assets/ResearchArea/Schematic_Reconfigurable_and_Concurrent_Dual_band_Doherty_PA.png";
-import ReconfigurableDualBand from "../assets/ResearchArea/Reconfigurable_and_Concurrent_Dual_band_Doherty_PA.png";
 import Chireix_outphasing_power_aplifier from "../assets/Technology/Chireix_outphasing_power_aplifier.png";
 
-import Device_size_schematic from "../assets/Technology/Device_size_schematic.png";
-
-import Type_2_Sequential_operation_Schematic from "../assets/Technology/Type_2_Sequential_operation_Schematic.png";
-
-import Gan_MMIC_in_Enclosure from "../assets/ResearchArea/Gan_MMIC_in_Enclosure.png";
-import GaN_MMIC_on_Testing from "../assets/ResearchArea/GaN_MMIC_on(testing).png";
-import C_Ku_Ultra_Wideband_PA from "../assets/ResearchArea/C-Ku Band Ultra Wideband MMIC PA.png";
-import Ku_Band_MMIC_PA from "../assets/ResearchArea/Ku Band MMIC PA.png";
-import Ku_Band_Radar from "../assets/ResearchArea/Ku-Band Radar Application.png";
-import C_Band_UAV from "../assets/ResearchArea/C-Band UAV Data Link.png";
-import Class_E_Chip from "../assets/ResearchArea/Class E Power Amplifier Chip.png";
-import Class_AB_Chip from "../assets/ResearchArea/Class AB Power Amplifier Chip.png";
-import BiCMOS_8XP from "../assets/ResearchArea/130nm GF SiGe BiCMOS (8XP).png";
-import TR_Chip_Enclosure from "../assets/ResearchArea/C_Ku 5_18 GHz GaN MMIC TR Chip in Enclosure.png";
-import UHF_UWB_PA from "../assets/ResearchArea/Ultra-Wideband UHF Power Amplifiers.png";
 import Digitizing_PA from "../assets/ResearchArea/Digitizing the Power Amplifiers.png";
 import DSM_Modulation from "../assets/ResearchArea/Delta Sigma Based Modulation.png";
-import SDR_Architecture from "../assets/ResearchArea/SDR Transceivers Architecture for.png";
-import SDR_Transceivers from "../assets/ResearchArea/SDR based Transceivers.png";
-import DPD_Process from "../assets/ResearchArea/DPD Implementation and Linearization Process.png";
-import Memory_Polynomial from "../assets/ResearchArea/Memory Polynomial Coefficients.png";
-import Level_Transformation from "../assets/ResearchArea/Level.png";
-import Unequal_Level_Transformation from "../assets/ResearchArea/Unequal Level transformation (6 Level – 3 Level).png";
 
-import Hardware_Setup from "../assets/ResearchArea/Hardware setup.png";
 
 // ================= IMAGE MODAL =================
 const ImageModal = ({ src, alt, isOpen, onClose }) => {
   if (!isOpen) return null;
+
 
   return (
     <div
@@ -79,9 +58,11 @@ const ImageModal = ({ src, alt, isOpen, onClose }) => {
   );
 };
 
+
 // ================= IMAGE GALLERY =================
 const ImageGallery = ({ images = [], theme = {} }) => {
   const [selectedImage, setSelectedImage] = useState(null);
+
 
   const getGridClass = (count) => {
     if (count === 1) return "grid-cols-1 max-w-2xl mx-auto";
@@ -89,7 +70,9 @@ const ImageGallery = ({ images = [], theme = {} }) => {
     return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
   };
 
+
   if (!images || images.length === 0) return null;
+
 
   return (
     <>
@@ -108,12 +91,14 @@ const ImageGallery = ({ images = [], theme = {} }) => {
                 style={{ minHeight: "200px", maxHeight: "400px" }}
               />
 
+
               <div className="absolute inset-4 bg-black/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 transform scale-75 group-hover:scale-100 transition-transform duration-300">
                   <ZoomIn className="w-6 h-6 text-gray-700" />
                 </div>
               </div>
             </div>
+
 
             {image.label && (
               <div className="p-4 bg-white border-t border-gray-100">
@@ -126,6 +111,7 @@ const ImageGallery = ({ images = [], theme = {} }) => {
         ))}
       </div>
 
+
       <ImageModal
         src={selectedImage?.src}
         alt={selectedImage?.alt}
@@ -136,22 +122,156 @@ const ImageGallery = ({ images = [], theme = {} }) => {
   );
 };
 
-// ================= TECH SPECS (optional component) =================
-const TechSpecs = ({ specs = [] }) => (
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-12">
-    {specs.map((spec, idx) => (
-      <div key={idx} className="bg-white rounded-xl p-4 shadow-md border border-gray-100 text-center">
-        <div className="text-2xl font-bold text-blue-600 mb-1">{spec.value}</div>
-        <div className="text-gray-600 text-sm">{spec.label}</div>
+
+// ================= STICKY NAVIGATION =================
+const StickyNavigation = ({ activeSection }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const navItems = [
+    { id: "top", label: "Overview", icon: Satellite },
+    { id: "waveform-engineering", label: "Waveform Engineering", icon: Zap },
+    { id: "wireless-base-station", label: "Wireless Base Station", icon: Wifi },
+    { id: "chireix-outphasing", label: "Chireix Outphasing", icon: Radio },
+    { id: "multilevel-modulation", label: "Multilevel Modulation", icon: Cpu }
+  ];
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  return (
+    <>
+      {/* Desktop Navigation */}
+      <nav className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-40">
+        <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 p-4 w-64">
+          <div className="mb-4 pb-3 border-b border-gray-200">
+            <h3 className="font-bold text-sm text-gray-700 uppercase tracking-wide">
+              Navigation
+            </h3>
+          </div>
+          
+          <ul className="space-y-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+              
+              return (
+                <li key={item.id}>
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 text-left group ${
+                      isActive
+                        ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md"
+                        : "hover:bg-gray-100 text-gray-600"
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 ${isActive ? "text-white" : "text-gray-400 group-hover:text-blue-500"}`} />
+                    <span className={`text-sm font-medium ${isActive ? "text-white" : ""}`}>
+                      {item.label}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </nav>
+
+      {/* Mobile Navigation - Floating Button */}
+      <div className="lg:hidden fixed bottom-6 right-6 z-40">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110"
+        >
+          <Wifi className="w-6 h-6" />
+        </button>
+
+        {isExpanded && (
+          <div className="absolute bottom-16 right-0 bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 p-4 w-64 max-h-96 overflow-y-auto">
+            <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-200">
+              <h3 className="font-bold text-sm text-gray-700">Navigate</h3>
+              <button
+                onClick={() => setIsExpanded(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            
+            <ul className="space-y-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeSection === item.id;
+                
+                return (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => {
+                        scrollToSection(item.id);
+                        setIsExpanded(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 text-left ${
+                        isActive
+                          ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                          : "hover:bg-gray-100 text-gray-600"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
-    ))}
-  </div>
-);
+    </>
+  );
+};
+
 
 // ================= MAIN COMPONENT =================
 const RFPowerAmplifiers = () => {
+  const [activeSection, setActiveSection] = useState("top");
+
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  // Scroll spy effect - Fixed to properly detect sections
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        "top",
+        "waveform-engineering",
+        "wireless-base-station",
+        "chireix-outphasing",
+        "multilevel-modulation"
+      ];
+
+      const scrollPosition = window.scrollY + 150;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Call once on mount
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Define research areas with their themes and images/subsections
@@ -167,9 +287,10 @@ const RFPowerAmplifiers = () => {
           title: "Switch Mode & Harmonic Terminated Power Amplifiers",
           description: "High-efficiency amplifier topologies that utilize switching operation and harmonic termination techniques.",
           images: [
+             { src: classD, alt: "Class D Power Amplifier", label: "Class D Power Amplifier" },
             { src: classE, alt: "Class E Power Amplifier", label: "Class E Power Amplifier" },
-            { src: classF, alt: "Class F Power Amplifier", label: "Class F Power Amplifier" },
-            { src: classD, alt: "Class D Power Amplifier", label: "Class D Power Amplifier" }
+            { src: classF, alt: "Class F Power Amplifier", label: "Class F Power Amplifier" }
+           
           ]
         },
         {
@@ -283,162 +404,183 @@ const RFPowerAmplifiers = () => {
     }
   ];
 
+
   return (
-    <div id="main-content" className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-      <div className="container mx-auto px-6 lg:px-12 py-16">
-        {/* Header */}
-        <header className="text-center mb-20">
-          <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full mb-6">
-            <div className="bg-white rounded-full px-6 py-2">
-              <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                RF Research & Development
-              </span>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      {/* Sticky Navigation */}
+      <StickyNavigation activeSection={activeSection} />
+
+      {/* Main Content - Added padding for desktop nav */}
+      <div id="main-content" className="lg:ml-80 lg:mr-8">
+        <div className="container mx-auto px-6 lg:px-12 py-16">
+          {/* Header */}
+          <header id="top" className="text-center mb-20">
+            <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full mb-6">
+              <div className="bg-white rounded-full px-6 py-2">
+                <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  RF Research & Development
+                </span>
+              </div>
             </div>
+
+
+            <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
+                Advanced RF Power Amplifiers and Transmitters
+              </span>
+            </h1>
+
+
+            <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+              Cutting-edge research and development in high-efficiency power amplifier technologies for next-generation wireless systems.
+            </p>
+
+
+            <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+
+
+          </header>
+
+
+          {/* Research Areas */}
+          <div className="space-y-24">
+            {researchAreas.map((area, index) => {
+              const Icon = area.icon;
+              return (
+                <section
+                  key={area.id}
+                  id={area.id}
+                  className={`relative overflow-hidden rounded-3xl ${area.theme.bg} ${area.theme.border} border-2 shadow-xl hover:shadow-2xl transition-all duration-500`}
+                >
+                  {/* Background Pattern */}
+                  <div className="absolute inset-0 opacity-5">
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
+                      backgroundSize: '30px 30px'
+                    }} />
+                  </div>
+
+
+                  <div className="relative p-8 lg:p-12">
+                    {/* Section Header */}
+                    <div className="flex items-center gap-6 mb-8">
+                      <div className={`p-4 rounded-2xl ${area.theme.button} shadow-lg transform hover:scale-110 transition-transform duration-300`}>
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h2 className={`text-3xl lg:text-4xl font-bold ${area.theme.accent} mb-3`}>
+                          {area.title}
+                        </h2>
+                        <div className={`h-1 w-20 ${area.theme.button} rounded-full`} />
+                      </div>
+                    </div>
+
+
+                    {/* Content */}
+                    <div className="mb-8">
+                      <p className="text-gray-700 text-lg leading-relaxed max-w-5xl">
+                        {area.content}
+                      </p>
+                    </div>
+
+
+                    {/* Subsections for Waveform Engineering */}
+                    {area.id === "waveform-engineering" && (
+                      <div className="space-y-12">
+                        {area.subsections.map((subsection, subIndex) => (
+                          <div key={subIndex} className="bg-white/50 rounded-2xl p-6">
+                            <h3 className={`text-xl font-semibold text-center ${area.theme.accent} mb-4`}>
+                              {subsection.title}
+                            </h3>
+                            {subsection.description && (
+                              <p className="text-gray-600 text-center mb-6 max-w-3xl mx-auto">
+                                {subsection.description}
+                              </p>
+                            )}
+                            <ImageGallery images={subsection.images} theme={area.theme} />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+
+                    {/* Wireless Base Station special nested rendering */}
+                    {area.id === "wireless-base-station" && (
+                      <div className="space-y-12">
+                        {area.subsections.map((sub, si) => (
+                          <div key={si} className="bg-white/60 rounded-2xl p-6">
+                            <h3 className={`text-2xl font-bold text-center ${area.theme.accent} mb-6`}>
+                              {sub.title}
+                            </h3>
+                            {sub.description && (
+                              <p className="text-gray-600 text-center mb-8 max-w-3xl mx-auto">
+                                {sub.description}
+                              </p>
+                            )}
+
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                              {sub.subpoints.map((point, pi) => (
+                                <div key={pi} className="bg-white/50 rounded-xl p-6 shadow-sm flex flex-col">
+                                  <h4 className={`text-lg font-semibold text-center ${area.theme.accent} mb-4`}>
+                                    {point.title}
+                                  </h4>
+                                  {point.description && (
+                                    <p className="text-gray-600 text-center mb-4">
+                                      {point.description}
+                                    </p>
+                                  )}
+                                  <ImageGallery images={point.images} theme={area.theme} />
+                                </div>
+                              ))}
+                            </div>
+
+
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+
+                    {/* Regular subsections for other areas */}
+                    {area.id !== "waveform-engineering" && area.id !== "wireless-base-station" && (
+                      area.subsections ? (
+                        area.subsections.map((sub, idx) => (
+                          <div key={idx} className="mb-8">
+                            <h3 className={`text-xl font-semibold text-center ${area.theme.accent} mb-4`}>
+                              {sub.title}
+                            </h3>
+                            {sub.description && (
+                              <p className="text-gray-600 text-center mb-6 max-w-3xl mx-auto">
+                                {sub.description}
+                              </p>
+                            )}
+                            {sub.images && <ImageGallery images={sub.images} theme={area.theme} />}
+                          </div>
+                        ))
+                      ) : (
+                        area.images && <ImageGallery images={area.images} theme={area.theme} />
+                      )
+                    )}
+                  </div>
+                </section>
+              );
+            })}
           </div>
 
-          <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
-              Advanced RF Power Amplifiers and Transmitters
-            </span>
-          </h1>
 
-          <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
-            Cutting-edge research and development in high-efficiency power amplifier technologies for next-generation wireless systems.
-          </p>
-
-          <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
-
-        </header>
-
-        {/* Research Areas */}
-        <div className="space-y-24">
-          {researchAreas.map((area, index) => {
-            const Icon = area.icon;
-            return (
-              <section
-                key={area.id}
-                id={area.id}
-                className={`relative overflow-hidden rounded-3xl ${area.theme.bg} ${area.theme.border} border-2 shadow-xl hover:shadow-2xl transition-all duration-500`}
-              >
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-5">
-                  <div className="absolute inset-0" style={{
-                    backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
-                    backgroundSize: '30px 30px'
-                  }} />
-                </div>
-
-                <div className="relative p-8 lg:p-12">
-                  {/* Section Header */}
-                  <div className="flex items-center gap-6 mb-8">
-                    <div className={`p-4 rounded-2xl ${area.theme.button} shadow-lg transform hover:scale-110 transition-transform duration-300`}>
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h2 className={`text-3xl lg:text-4xl font-bold ${area.theme.accent} mb-3`}>
-                        {area.title}
-                      </h2>
-                      <div className={`h-1 w-20 ${area.theme.button} rounded-full`} />
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="mb-8">
-                    <p className="text-gray-700 text-lg leading-relaxed max-w-5xl">
-                      {area.content}
-                    </p>
-                  </div>
-
-                  {/* Subsections for Waveform Engineering */}
-                  {area.id === "waveform-engineering" && (
-                    <div className="space-y-12">
-                      {area.subsections.map((subsection, subIndex) => (
-                        <div key={subIndex} className="bg-white/50 rounded-2xl p-6">
-                          <h3 className={`text-xl font-semibold text-center ${area.theme.accent} mb-4`}>
-                            {subsection.title}
-                          </h3>
-                          {subsection.description && (
-                            <p className="text-gray-600 text-center mb-6 max-w-3xl mx-auto">
-                              {subsection.description}
-                            </p>
-                          )}
-                          <ImageGallery images={subsection.images} theme={area.theme} />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Wireless Base Station special nested rendering */}
-                  {area.id === "wireless-base-station" && (
-                    <div className="space-y-12">
-                      {area.subsections.map((sub, si) => (
-                        <div key={si} className="bg-white/60 rounded-2xl p-6">
-                          <h3 className={`text-2xl font-bold text-center ${area.theme.accent} mb-6`}>
-                            {sub.title}
-                          </h3>
-                          {sub.description && (
-                            <p className="text-gray-600 text-center mb-8 max-w-3xl mx-auto">
-                              {sub.description}
-                            </p>
-                          )}
-
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {sub.subpoints.map((point, pi) => (
-                              <div key={pi} className="bg-white/50 rounded-xl p-6 shadow-sm flex flex-col">
-                                <h4 className={`text-lg font-semibold text-center ${area.theme.accent} mb-4`}>
-                                  {point.title}
-                                </h4>
-                                {point.description && (
-                                  <p className="text-gray-600 text-center mb-4">
-                                    {point.description}
-                                  </p>
-                                )}
-                                <ImageGallery images={point.images} theme={area.theme} />
-                              </div>
-                            ))}
-                          </div>
-
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Regular subsections for other areas */}
-                  {area.id !== "waveform-engineering" && area.id !== "wireless-base-station" && (
-                    area.subsections ? (
-                      area.subsections.map((sub, idx) => (
-                        <div key={idx} className="mb-8">
-                          <h3 className={`text-xl font-semibold text-center ${area.theme.accent} mb-4`}>
-                            {sub.title}
-                          </h3>
-                          {sub.description && (
-                            <p className="text-gray-600 text-center mb-6 max-w-3xl mx-auto">
-                              {sub.description}
-                            </p>
-                          )}
-                          {sub.images && <ImageGallery images={sub.images} theme={area.theme} />}
-                        </div>
-                      ))
-                    ) : (
-                      area.images && <ImageGallery images={area.images} theme={area.theme} />
-                    )
-                  )}
-                </div>
-              </section>
-            );
-          })}
-        </div>
-
-        {/* Footer */}
-        <div className="mt-24 text-center">
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"></div>
-          <p className="text-gray-500 text-lg">
-            Pioneering the future of RF power amplification technology
-          </p>
+          {/* Footer */}
+          <div className="mt-24 text-center">
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"></div>
+            <p className="text-gray-500 text-lg">
+              Pioneering the future of RF power amplification technology
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
 
 export default RFPowerAmplifiers;

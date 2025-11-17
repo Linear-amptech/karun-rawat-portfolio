@@ -1,19 +1,13 @@
 import { 
   AboutMe,
   Home,
-  NewsAndHighlights,
   Publications,
   ReasearchandTech,
   TeamAndMembers,
   TrainingAndWorkshops,
-  Technology,
   IndustryCorner,
   StudentCorner,
   Contact,
-  WaveformPA,
-  EfficientWireless,
-  StrategicArea,
-  Transmitter5G,
   RFPowerAmplifiers,
   RFIntegratedCircuits,
   TurnkeySolutions
@@ -31,7 +25,7 @@ function App() {
   const isNoPadding = noPaddingRoutes.includes(location.pathname);
 
   // Footer should NOT appear on Home
-  const hideFooterRoutes = ["/"]; // add more if needed
+  const hideFooterRoutes = ["/"]; 
   const isFooterHidden = hideFooterRoutes.includes(location.pathname);
 
   return (
@@ -49,15 +43,12 @@ function App() {
           <Route path="/publications" element={<Publications />} />
           <Route path="/training-workshops" element={<TrainingAndWorkshops />} />
           <Route path="/team-members" element={<TeamAndMembers />} />
-          <Route path="/news-highlights" element={<NewsAndHighlights />} />
-          <Route path="/technology" element={<Technology />} />
+   
+          {/* <Route path="/technology" element={<Technology />} /> */}
           <Route path="/industry-corner" element={<IndustryCorner />} />
           <Route path="/student-corner" element={<StudentCorner />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/waveform-pa" element={<WaveformPA />} />
-          <Route path="/efficient-wireless" element={<EfficientWireless />} />
-          <Route path="/strategic-area" element={<StrategicArea />} />
-          <Route path="/5g-transmitter" element={<Transmitter5G />} />
+
           <Route path="/rf-power-amplifiers" element={<RFPowerAmplifiers />} />
           <Route path="/rf-integrated-circuits" element={<RFIntegratedCircuits />} />
           <Route path="/turnkey-solutions" element={<TurnkeySolutions />} />

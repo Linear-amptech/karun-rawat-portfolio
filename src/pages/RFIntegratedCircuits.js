@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Cpu, Zap, Settings, X, ZoomIn } from "lucide-react";
+import { Cpu, Zap, Settings, X, ZoomIn, Satellite } from "lucide-react";
+
 
 // Import images
 import GanMMICEnclosure from "../assets/ResearchArea/Gan_MMIC_in_Enclosure.png";
@@ -10,12 +11,150 @@ import SiGePA from "../assets/Technology/SiGe_PA_Chip.png";
 import CMOS from "../assets/ResearchArea/cmos.png";
 import ClassEPA from "../assets/ResearchArea/Class E Power Amplifier Chip.png";
 
+
+// ================= STICKY NAVIGATION =================
+const StickyNavigation = ({ activeSection }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const navItems = [
+    { id: "top", label: "Overview", icon: Satellite },
+    { id: "gan", label: "GaN Based MMIC", icon: Zap },
+    { id: "silicon", label: "Silicon Based RFIC", icon: Cpu }
+  ];
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  return (
+    <>
+      {/* Desktop Navigation */}
+      <nav className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-40">
+        <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 p-4 w-64">
+          <div className="mb-4 pb-3 border-b border-gray-200">
+            <h3 className="font-bold text-sm text-gray-700 uppercase tracking-wide">
+              Navigation
+            </h3>
+          </div>
+          
+          <ul className="space-y-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+              
+              return (
+                <li key={item.id}>
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 text-left group ${
+                      isActive
+                        ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md"
+                        : "hover:bg-gray-100 text-gray-600"
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 ${isActive ? "text-white" : "text-gray-400 group-hover:text-blue-500"}`} />
+                    <span className={`text-sm font-medium ${isActive ? "text-white" : ""}`}>
+                      {item.label}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </nav>
+
+      {/* Mobile Navigation - Floating Button */}
+      <div className="lg:hidden fixed bottom-6 right-6 z-40">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110"
+        >
+          <Cpu className="w-6 h-6" />
+        </button>
+
+        {isExpanded && (
+          <div className="absolute bottom-16 right-0 bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 p-4 w-64 max-h-96 overflow-y-auto">
+            <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-200">
+              <h3 className="font-bold text-sm text-gray-700">Navigate</h3>
+              <button
+                onClick={() => setIsExpanded(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            
+            <ul className="space-y-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeSection === item.id;
+                
+                return (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => {
+                        scrollToSection(item.id);
+                        setIsExpanded(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 text-left ${
+                        isActive
+                          ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                          : "hover:bg-gray-100 text-gray-600"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+
 const RFIntegratedCircuits = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [activeSection, setActiveSection] = useState("top");
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Scroll spy effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["top", "gan", "silicon"];
+      const scrollPosition = window.scrollY + 150;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Call once on mount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
 
   const sections = [
     {
@@ -72,6 +211,7 @@ const RFIntegratedCircuits = () => {
     }
   ];
 
+
   const ImageModal = ({ image, onClose }) => (
     <div 
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" 
@@ -99,6 +239,7 @@ const RFIntegratedCircuits = () => {
     </div>
   );
 
+
   const ImageGallery = ({ images, theme, showIndividualLabels = true }) => {
     const getGridClass = (count) => {
       if (count === 1) return "grid-cols-1 max-w-2xl mx-auto";
@@ -106,6 +247,7 @@ const RFIntegratedCircuits = () => {
       if (count === 4) return "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6";
       return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
     };
+
 
     return (
       <div className={`grid ${getGridClass(images.length)} mt-10`}>
@@ -132,6 +274,7 @@ const RFIntegratedCircuits = () => {
               </div>
             </div>
 
+
             {/* Individual Label - only show if showIndividualLabels is true */}
             {showIndividualLabels && (
               <div className="p-4 bg-white border-t border-gray-100">
@@ -145,6 +288,7 @@ const RFIntegratedCircuits = () => {
       </div>
     );
   };
+
 
   const SubsectionImages = ({ subsection, theme, index }) => (
     <div className="mt-16 p-8 bg-white/60 backdrop-blur-sm rounded-3xl border-2 border-white/80 shadow-xl">
@@ -177,100 +321,116 @@ const RFIntegratedCircuits = () => {
     </div>
   );
 
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-      <div className="container mx-auto px-6 lg:px-12 py-16">
-        {/* Header */}
-        <header className="text-center mb-20">
-          <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full mb-6">
-            <div className="bg-white rounded-full px-6 py-2">
-              <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Advanced Semiconductor Technology
-              </span>
+      {/* Sticky Navigation */}
+      <StickyNavigation activeSection={activeSection} />
+
+      {/* Main Content - Added padding for desktop nav */}
+      <div className="lg:ml-80 lg:mr-8">
+        <div className="container mx-auto px-6 lg:px-12 py-16">
+          {/* Header */}
+          <header id="top" className="text-center mb-20">
+            <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full mb-6">
+              <div className="bg-white rounded-full px-6 py-2">
+                <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Advanced Semiconductor Technology
+                </span>
+              </div>
             </div>
+
+
+            <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
+                Radio Frequency Integrated Circuits (Semiconductor IC Design)
+              </span>
+            </h1>
+
+
+            <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+              Design and development of cutting-edge RF integrated circuits using advanced semiconductor technologies for next-generation applications
+            </p>
+
+
+            <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+          </header>
+
+
+          {/* Technology Sections */}
+          <div className="space-y-24">
+            {sections.map((section, index) => {
+              const Icon = section.icon;
+              return (
+                <section
+                  key={section.id}
+                  id={section.id}
+                  className={`relative overflow-hidden rounded-3xl ${section.theme.bg} ${section.theme.border} border-2 shadow-xl hover:shadow-2xl transition-all duration-500`}
+                >
+                  {/* Background Pattern */}
+                  <div className="absolute inset-0 opacity-5">
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
+                      backgroundSize: '30px 30px'
+                    }} />
+                  </div>
+
+
+                  <div className="relative p-8 lg:p-12">
+                    {/* Section Header */}
+                    <div className="flex items-center gap-6 mb-8">
+                      <div className={`p-4 rounded-2xl ${section.theme.button} shadow-lg transform hover:scale-110 transition-transform duration-300`}>
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h2 className={`text-3xl lg:text-4xl font-bold ${section.theme.accent} mb-3`}>
+                          {section.title}
+                        </h2>
+                        <div className={`h-1 w-20 ${section.theme.button} rounded-full`} />
+                      </div>
+                    </div>
+
+
+                    {/* Content */}
+                    <div className="mb-8">
+                      <p className="text-gray-700 text-lg leading-relaxed max-w-5xl">
+                        {section.text}
+                      </p>
+                    </div>
+
+
+                    {/* Images for GaN section or Subsections for Silicon */}
+                    {section.images ? (
+                      <ImageGallery images={section.images} theme={section.theme} />
+                    ) : (
+                      <div className="space-y-20">
+                        {section.subsections?.map((subsection, subIndex) => (
+                          <SubsectionImages
+                            key={subIndex}
+                            subsection={subsection}
+                            theme={section.theme}
+                            index={subIndex}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </section>
+              );
+            })}
           </div>
 
-          <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
-              RF Integrated Circuits
-            </span>
-          </h1>
 
-          <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
-            Design and development of cutting-edge RF integrated circuits using advanced semiconductor technologies for next-generation applications
-          </p>
-
-          <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
-        </header>
-
-        {/* Technology Sections */}
-        <div className="space-y-24">
-          {sections.map((section, index) => {
-            const Icon = section.icon;
-            return (
-              <section
-                key={section.id}
-                id={section.id}
-                className={`relative overflow-hidden rounded-3xl ${section.theme.bg} ${section.theme.border} border-2 shadow-xl hover:shadow-2xl transition-all duration-500`}
-              >
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-5">
-                  <div className="absolute inset-0" style={{
-                    backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
-                    backgroundSize: '30px 30px'
-                  }} />
-                </div>
-
-                <div className="relative p-8 lg:p-12">
-                  {/* Section Header */}
-                  <div className="flex items-center gap-6 mb-8">
-                    <div className={`p-4 rounded-2xl ${section.theme.button} shadow-lg transform hover:scale-110 transition-transform duration-300`}>
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h2 className={`text-3xl lg:text-4xl font-bold ${section.theme.accent} mb-3`}>
-                        {section.title}
-                      </h2>
-                      <div className={`h-1 w-20 ${section.theme.button} rounded-full`} />
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="mb-8">
-                    <p className="text-gray-700 text-lg leading-relaxed max-w-5xl">
-                      {section.text}
-                    </p>
-                  </div>
-
-                  {/* Images for GaN section or Subsections for Silicon */}
-                  {section.images ? (
-                    <ImageGallery images={section.images} theme={section.theme} />
-                  ) : (
-                    <div className="space-y-20">
-                      {section.subsections?.map((subsection, subIndex) => (
-                        <SubsectionImages
-                          key={subIndex}
-                          subsection={subsection}
-                          theme={section.theme}
-                          index={subIndex}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </section>
-            );
-          })}
-        </div>
-
-        {/* Footer */}
-        <div className="mt-24 text-center">
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"></div>
-          <p className="text-gray-500 text-lg">
-            Innovating at the intersection of semiconductor technology and RF engineering
-          </p>
+          {/* Footer */}
+          <div className="mt-24 text-center">
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"></div>
+            <p className="text-gray-500 text-lg">
+              Innovating at the intersection of semiconductor technology and RF engineering
+            </p>
+          </div>
         </div>
       </div>
+
 
       {/* Image Modal */}
       {selectedImage && (
@@ -282,5 +442,6 @@ const RFIntegratedCircuits = () => {
     </div>
   );
 };
+
 
 export default RFIntegratedCircuits;

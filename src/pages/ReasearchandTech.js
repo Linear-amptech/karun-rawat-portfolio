@@ -21,6 +21,13 @@ import rfPowerAmplifierImg from "../assets/Home/RF_wireless.png";
 import rfIntegratedCircuitsImg from "../assets/Home/RFIC (2).jpeg";
 import turnKeySolutionsImg from "../assets/Home/turn_key_solution.jpeg";
 
+//collaboratos
+import franciscoFalcone from '../assets/Research & Tech/francisco-falcone.png.webp';
+import ghannouchi from '../assets/Research & Tech/Ghannouchi-Photo.jpg';
+import helaoui from '../assets/Research & Tech/M.Helaoui.jfif';
+import roblin from '../assets/Research & Tech/Patrick.Roblin_cropped.jpg';
+import chen from '../assets/Research & Tech/Wenhua_Chen.jpg';
+
 const ResearchandTech = () => {
   const [visibleCards, setVisibleCards] = useState(new Set());
   const [activeSection, setActiveSection] = useState("research-area");
@@ -76,6 +83,14 @@ const ResearchandTech = () => {
   const ongoingProjects = [
     {
       title:
+        "Development of high-efficiency C-Band Power Amplifier Units",
+      duration: "2024-2026",
+      role: "PI",
+      sponsor: "Government of India"
+    },
+    
+    {
+      title:
         "Development of On-Demand Single Photon Emitters, Single Photon Avalanche Detectors, High-Frequency Devices Units",
       duration: "2025-2030",
       role: "PI",
@@ -108,63 +123,103 @@ const ResearchandTech = () => {
     }
   ];
 
-  const completedProjects = [
-    {
-      title:
-        "Wideband Gallium Nitride Based Outphasing Power Amplifier for Upcoming 5G Wireless Transmitters",
-      duration: "2019-2022",
-      role: "PI",
-      sponsor: "Extra Mural (SERB Government of India)"
-    },
-    {
-      title:
-        "Broad-Band Gallium Nitride Based Doherty Power Amplifier for Efficient Amplification of High Crest Factor Signals",
-      duration: "2014-2017",
-      role: "PI",
-      sponsor: "SERB, Government of India"
-    },
-    {
-      title:
-        "The infrastructural grant under the Visvesvaraya PhD Scheme for Electronics and IT.",
-      duration: "2016-2020",
-      role: "PI",
-      sponsor: "DeitY, Government of India"
-    },
-    {
-      title:
-        "Consultancy project 'Experiments development for Software defined radio SDR-Lab'",
-      duration: "2014",
-      role: "PI",
-      sponsor: "Amitec Electronics Ltd., New Delhi"
-    },
-    {
-      title:
-        "Training to BEL on 'Efficient and Linearized Power Amplifier and Transmitters RF Power Amplifier'",
-      duration: "2018-2019",
-      role: "PI",
-      sponsor: "BEL, Bengaluru, India"
-    },
-    { title: "Training to BEL on 'GaN based MMIC PA Design'", duration: "2019", role: "PI", sponsor: "BEL, Bengaluru, India" },
-    {
-      title:
-        "GIAN Course on RF Power Amplifier Design and Integration for 4G/5G Applications",
-      duration: "2017",
-      role: "PI",
-      sponsor: "MHRD, Government of India"
-    },
-    {
-      title:
-        "Radio Frequency Power Amplifier Design & Distortion Mitigation for Energy and Spectrum Efficient 5G Wireless Transmitters",
-      duration: "2019-2021",
-      role: "PI",
-      sponsor: "SPARC (MHRD, Government of India)"
-    }
-  ];
+const completedProjects = [
+  {
+    title:
+      "Design of Airborne Power Amplifiers for L-band and UHF frequency range.",
+    duration: "2020-2022",
+    role: "PI",
+    sponsor: "Government of India"
+  },
+  {
+    title:
+      "Nonlinear GaN HEMT Device Characterization for Power Amplifier Design and Implementation at X-Band frequencies.",
+    duration: "2019-2022",
+    role: "PI",
+    sponsor: "Government of India"
+  },
+  {
+    title:
+      "Wideband Gallium Nitride Based Outphasing Power Amplifier for Upcoming 5G Wireless Transmitters",
+    duration: "2019-2022",
+    role: "PI",
+    sponsor: "Extra Mural (SERB Government of India)"
+  },
+  {
+    title:
+      "Broad-Band Gallium Nitride Based Doherty Power Amplifier for Efficient Amplification of High Crest Factor Signals",
+    duration: "2014-2017",
+    role: "PI",
+    sponsor: "SERB, Government of India"
+  },
+  {
+    title:
+      "The infrastructural grant under the Visvesvaraya PhD Scheme for Electronics and IT.",
+    duration: "2016-2020",
+    role: "PI",
+    sponsor: "DeitY, Government of India"
+  },
+  {
+    title:
+      "Consultancy project \"Experiments development for Software defined radio SDR-Lab\"",
+    duration: "2014",
+    role: "PI",
+    sponsor: "Amitec Electronics Ltd., New Delhi"
+  },
+  {
+    title:
+      "Consultancy project \"RF Power Amplifier Design based on SSPL GaN Devices\"",
+    duration: "2016-2018",
+    role: "PI",
+    sponsor: "Government of India"
+  },
+  {
+    title:
+      "Training to BEL on \"Efficient and Linearized Power Amplifier and Transmitters RF Power Amplifier\"",
+    duration: "2018-2019",
+    role: "PI",
+    sponsor: "Government of India"
+  },
+  {
+    title: "Training to BEL on \"GaN based MMIC PA Design\"",
+    duration: "2019",
+    role: "PI",
+    sponsor: "Government of India"
+  },
+  {
+    title:
+      "GIAN Course on RF Power Amplifier Design and Integration for 4G/5G Applications",
+    duration: "2017",
+    role: "PI",
+    sponsor: "MHRD, Government of India"
+  },
+  {
+    title:
+      "Study of Design Feasibility for High Power GaN-based Power Amplifier at Ku-Band in Hybrid MIC Technology",
+    duration: "2017-2019",
+    role: "PI",
+    sponsor: "Government of India"
+  },
+  {
+    title:
+      "Study and Design Challenges in GaN MMIC-based Power Amplifier at Ku-Band",
+    duration: "2017-2020",
+    role: "PI",
+    sponsor: "Government of India"
+  },
+  {
+    title:
+      "Radio Frequency Power Amplifier Design & Distortion Mitigation for Energy and Spectrum Efficient 5G Wireless Transmitters",
+    duration: "2019-2021",
+    role: "PI",
+    sponsor: "SPARC (MHRD, Government of India)"
+  }
+];
 
   const researchAreas = [
     {
       id: 1,
-      title: "Radio Frequency Power Amplifier & Wireless Transmitters",
+      title: "Advanced Radio Frequency Power Amplifier & Wireless Transmitters",
       description:
         "Research on advanced power amplifier architectures, waveform engineering, and transmitter solutions for next-generation wireless communication systems.",
       image: rfPowerAmplifierImg,
@@ -200,13 +255,33 @@ const ResearchandTech = () => {
     }
   ];
 
-  const collaborators = [
-    { name: "Prof. Fadhel Ghannouchi", institution: "University of Calgary, Canada" },
-    { name: "Prof. M. Helaoui", institution: "University of Calgary, Canada" },
-    { name: "Prof. Patrick Roblin", institution: "Ohio State University, USA" },
-    { name: "Prof. Wenhua Chen", institution: "Tsinghua University, Beijing, China" },
-    { name: "Prof. Francisco Falcone", institution: "Universidad Publica de Navarra, UPNA, Spain" }
-  ];
+const collaborators = [
+  { 
+    name: "Prof. Fadhel Ghannouchi", 
+    institution: "University of Calgary, Canada",
+    image: ghannouchi
+  },
+  { 
+    name: "Prof. M. Helaoui", 
+    institution: "University of Calgary, Canada",
+    image: helaoui
+  },
+  { 
+    name: "Prof. Patrick Roblin", 
+    institution: "Ohio State University, USA",
+    image: roblin
+  },
+  { 
+    name: "Prof. Wenhua Chen", 
+    institution: "Tsinghua University, Beijing, China",
+    image: chen
+  },
+  { 
+    name: "Prof. Francisco Falcone", 
+    institution: "Universidad Publica de Navarra, UPNA, Spain",
+    image: franciscoFalcone
+  }
+];
 
   const facilities = [
     {
@@ -454,23 +529,41 @@ const ResearchandTech = () => {
             </div>
           </div>
 
-          {/* Collaborators Section */}
-          <div className={`transition-all duration-500 ease-in-out ${
-            activeSection === "collaborators" 
-              ? "block p-4 sm:p-6 md:p-8" 
-              : "hidden"
-          }`}>
-            <div className="flex items-center gap-4 mb-6 pb-4 border-b border-blue-100">
-              <div className="w-2 h-8 bg-gradient-to-b from-green-500 to-green-400 rounded-full"></div>
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-800">International Collaborators</h2>
-            </div>
-            <div className="grid gap-2">
-              {collaborators.map((collaborator, index) => (
-                <ResearchItem key={`collab-${index}`} item={collaborator} index={index} type="collaborator" />
-              ))}
-            </div>
-          </div>
-
+{/* Collaborators Section */}
+<div className={`transition-all duration-500 ease-in-out ${
+  activeSection === "collaborators" 
+    ? "block p-4 sm:p-6 md:p-8" 
+    : "hidden"
+}`}>
+  <div className="flex items-center gap-4 mb-8 pb-4 border-b border-blue-100">
+    <div className="w-2 h-8 bg-gradient-to-b from-green-500 to-green-400 rounded-full"></div>
+    <h2 className="text-xl sm:text-2xl font-bold text-gray-800">International Collaborators</h2>
+  </div>
+  
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
+    {collaborators.map((collaborator, index) => (
+      <div 
+        key={`collab-${index}`}
+        className="flex flex-col items-center text-center group"
+      >
+        <div className="relative w-32 h-32 mb-4">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-green-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+          <img 
+            src={collaborator.image} 
+            alt={collaborator.name}
+            className="relative w-full h-full object-cover rounded-full border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <h3 className="font-semibold text-base text-gray-800 mb-2 px-2">
+          {collaborator.name}
+        </h3>
+        <p className="text-sm text-gray-600 leading-relaxed px-2">
+          {collaborator.institution}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
           {/* Research Facilities Section */}
           <div className={`transition-all duration-500 ease-in-out ${
             activeSection === "facilities" 
@@ -506,8 +599,9 @@ const ResearchandTech = () => {
                 <h3 className="text-lg sm:text-xl font-semibold text-blue-900">External Funding Generated</h3>
               </div>
               <p className="text-base sm:text-lg text-gray-700">
+                approx.
                 <span className="font-bold text-blue-800">₹3037.89 Lakhs</span>
-                <span className="text-gray-600"> (~ USD: 3.56 M)</span> have been generated from various sponsors for research projects and consultancy work.
+                <span className="text-gray-600"> (~ USD: 3.56 M)</span> have been generated from various sponsors for research projects and consultancy work as Principle Investigators (PIs) as well as Co-Investigators (CIs).
               </p>
             </div>
 
