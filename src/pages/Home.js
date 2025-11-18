@@ -1,103 +1,97 @@
-import React from "react";
-import { Card } from "../components";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  SatelliteDish,
+  CircuitBoard,
+  Settings,
+ 
+} from "lucide-react";
+import Hero from "../components/Hero";
+
+// Research Area Images
+import rfPowerAmplifierImg from "../assets/Home/RF_wireless.png";
+import rfIntegratedCircuitsImg from "../assets/Home/RFIC (2).jpeg";
+import turnKeySolutionsImg from "../assets/Home/turn_key_solution.jpeg";
+
+// Sponsor Logos
+import DST from "../assets/Home/DST_logo.png";
+import Wipro from "../assets/Home/Wipro_logo.png";
+import GF from "../assets/Home/Global_Foundries_logo.png";
+
+import AMP from "../assets/Home/Amp_logo.png";
+import Keysight from "../assets/Home/KeySight_logo.png";
 
 const Home = () => {
+  const [visibleCards, setVisibleCards] = useState(new Set());
+  const [hoveredSponsor, setHoveredSponsor] = useState(null);
+  const [activeImageModal, setActiveImageModal] = useState(null);
+
+  const researchAreas = [
+    {
+      id: 1,
+      title: "Radio Frequency Power Amplifier & Wireless Transmitters",
+      description:
+        "Research on advanced power amplifier architectures, waveform engineering, and transmitter solutions for next-generation wireless communication systems.",
+      image: rfPowerAmplifierImg,
+      gradient: "from-blue-600 via-cyan-500 to-teal-400",
+      bgGradient: "from-blue-50 via-cyan-50 to-teal-50",
+      link: "/rf-power-amplifiers",
+      icon: <SatelliteDish className="w-6 h-6" />,
+      tags: ["5G/6G", "Power Amplifiers", "Wireless"],
+    },
+    {
+      id: 2,
+      title: "Radio Frequency Integrated Circuits (Semiconductor IC Design)",
+      description:
+        "Design and development of RF integrated circuits using GaN, SiGe BiCMOS, and CMOS technologies for high-frequency applications.",
+      image: rfIntegratedCircuitsImg,
+      gradient: "from-purple-600 via-pink-500 to-rose-400",
+      bgGradient: "from-purple-50 via-pink-50 to-rose-50",
+      link: "/rf-integrated-circuits",
+      icon: <CircuitBoard className="w-6 h-6" />,
+      tags: ["GaN", "SiGe BiCMOS", "CMOS"],
+    },
+    {
+      id: 3,
+      title: "Turn-Key Solutions for Wireless Systems",
+      description:
+        "End-to-end solutions including RIS, SDR, active antennas, RF location finding, LoRa, drone detection, and AI integration for wireless systems.",
+      image: turnKeySolutionsImg,
+      gradient: "from-emerald-600 via-green-500 to-lime-400",
+      bgGradient: "from-emerald-50 via-green-50 to-lime-50",
+      link: "/turnkey-solutions",
+      icon: <Settings className="w-6 h-6" />,
+      tags: ["AI/ML", "IoT", "SDR"],
+    },
+  ];
+
+  const sponsors = [
+    { name: "DST", logo: DST },
+    { name: "Wipro", logo: Wipro },
+    { name: "Global Foundries", logo: GF },
+
+    { name: "AMP", logo: AMP },
+    { name: "Keysight", logo: Keysight },
+  ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setVisibleCards((prev) => new Set([...prev, entry.target.dataset.cardId]));
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const cards = document.querySelectorAll("[data-card-id]");
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div>
-      {/* ************************Research Section ************************ */}
-      <div className="research my-2 ">
-        <h2 className="text-center text-[2rem] text-[#1d466e] font-semibold mb-5 py-3 xl:py-12">
-          Areas of Research
-        </h2>
-        <div className="cardContainer flex flex-col gap-8 justify-center items-center w-[100%] mb-20">
-          <div
-            className={`card  w-[80vw] flex flex-col md:flex-row justify-start items-center text-white shadow-md rounded-lg sm:pb-5 md:pb-0`}
-            style={{ backgroundColor: `#ffffff`, color: "black" }}
-          >
-            <div className="upperImg bg-[#e6fdff]  lg:w-[550px] md:w-[350px] flex flex-col justify-center items-center h-[300px] overflow-hidden">
-              <img
-                src={require("../assets/Research & Tech/p1.png")}
-                className="h-[80%]"
-              ></img>
-            </div>
-            <div className="lowerContent md:ml-10  w-[78%]">
-              <h3 className="text-[1.5rem] font-semibold my-5 ">
-                Radio Frequency Active circuits
-              </h3>
-              <p className="pb-5">
-                Power Amplifiers, Efficiency enhancement Doherty Power
-                Amplifiers, Chireix outphasing amplifiers, Waveform Engineering
-                (Class E/F, B/J, etc.) based Octave & Multi-octave power
-                amplifiers etc.
-              </p>
-            </div>
-          </div>
-          <div
-            className={`card  w-[80vw] flex flex-col md:flex-row justify-start items-center text-white shadow-md rounded-lg sm:pb-5 md:pb-0`}
-            style={{ backgroundColor: `#ffffff`, color: "black" }}
-          >
-            <div className="upperImg bg-[#e6fdff]  lg:w-[550px] md:w-[350px] flex flex-col justify-center items-center h-[300px] overflow-hidden">
-              <img
-                src={require("../assets/Research & Tech/p2.png")}
-                className="scale-125"
-              ></img>
-            </div>
-            <div className="lowerContent md:ml-10  w-[78%]">
-              <h3 className="text-[1.5rem] font-semibold my-5 ">
-                On-chip RF Circuits
-              </h3>
-              <p className="pb-5">
-                Power Amplifier Design in Gallium Nitride MMIC Design, BiCMOS RF
-                circuits with millimeter wave applications, RF mixed signal CMOS
-                design etc.
-              </p>
-            </div>
-          </div>
-          <div
-            className={`card  w-[80vw] flex flex-col md:flex-row justify-start items-center text-white shadow-md rounded-lg sm:pb-5 md:pb-0`}
-            style={{ backgroundColor: `#ffffff`, color: "black" }}
-          >
-            <div className="upperImg bg-[#e6fdff]  lg:w-[550px] md:w-[350px] flex flex-col justify-center items-center h-[300px] overflow-hidden">
-              <img
-                src={require("../assets/Research & Tech/p4.jpg")}
-                className="scale-150"
-              ></img>
-            </div>
-            <div className="lowerContent md:ml-10  w-[78%]">
-              <h3 className="text-[1.5rem] font-semibold my-5 ">
-                Embedding System Design for Radio development
-              </h3>
-              <p className="pb-5">
-                Delta Sigma Modulation with Noise Shaping Filter, radio
-                functionality in wireless transmitters such as predistortion,
-                beam forming etc.
-              </p>
-            </div>
-          </div>
-          <div
-            className={`card  w-[80vw] flex flex-col md:flex-row justify-start items-center text-white shadow-md rounded-lg sm:pb-5 md:pb-0`}
-            style={{ backgroundColor: `#ffffff`, color: "black" }}
-          >
-            <div className="upperImg bg-[#e6fdff]  lg:w-[550px] md:w-[350px] flex flex-col justify-center items-center h-[300px] overflow-hidden">
-              <img
-                src={require("../assets/Research & Tech/p2.jpg")}
-                className="scale-150"
-              ></img>
-            </div>
-            <div className="lowerContent md:ml-10  w-[78%]">
-              <h3 className="text-[1.5rem] font-semibold my-5 ">
-                Radio Frequency Device Characterization & Modeling
-              </h3>
-              <p className="pb-5">
-                Power Amplifiers, Efficiency enhancement Doherty Power
-                Amplifiers, Chireix outphasing amplifiers, Waveform Engineering
-                (Class E/F, B/J, etc.) based Octave & Multi-octave power
-                amplifiers etc.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id="main-content" className="min-h-screen text-slate-800">
+      <Hero />
     </div>
   );
 };
