@@ -100,7 +100,7 @@ const ProfessorProfile = () => {
                   <div className="space-y-2.5 mt-5">
                     <div className="group cursor-default">
                       <p className="text-lg sm:text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 leading-snug hover:from-amber-300 hover:to-orange-300 transition-all duration-300">
-                        Head, Centre for Semiconductor Design & Technology
+                        Dean, International Relations
                       </p>
                       <div className="w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-amber-400 to-transparent transition-all duration-500 mt-1"></div>
                     </div>

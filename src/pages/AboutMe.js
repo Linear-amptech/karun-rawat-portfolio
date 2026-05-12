@@ -54,8 +54,19 @@ const AboutMe = () => {
   ];
 
   const timelineData = [
+
     {
       id: 1,
+      period: "Feb. 2026-Current",
+      position: "Dean",
+      department: "International Relations",
+      institution: "IIT Roorkee",
+      location: "Roorkee, India",
+      type: "current"
+    },
+
+    {
+      id: 2,
       period: "Aug. 2024-Current",
       position: "Professor",
       department: "Electronics & Communication Engineering",
@@ -63,8 +74,17 @@ const AboutMe = () => {
       location: "Roorkee, India",
       type: "current"
     },
+        {
+      id: 3,
+      period: "Sep. 2024-Feb. 2026",
+      position: "Head",
+      department: "Centre for Semiconductor Design & Technology",
+      institution: "IIT Roorkee",
+      location: "Roorkee, India",
+      type: "past"
+    },
     {
-      id: 2,
+      id: 4,
       period: "Aug. 2024-Dec. 2024",
       position: "Coordinator",
       department: "Re-Think! The Tinkering Lab",
@@ -73,7 +93,7 @@ const AboutMe = () => {
       type: "past"
     },
     {
-      id: 3,
+      id: 5,
       period: "Dec. 2019-Aug. 2024",
       position: "Associate Professor",
       department: "Electronics & Communication Engineering",
@@ -82,7 +102,7 @@ const AboutMe = () => {
       type: "past"
     },
     {
-      id: 4,
+      id: 6,
       period: "Dec. 2014-Dec. 2019",
       position: "Assistant Professor",
       department: "Electronics & Communication Engineering",
@@ -91,7 +111,7 @@ const AboutMe = () => {
       type: "past"
     },
     {
-      id: 5,
+      id: 7,
       period: "April 2013-Dec. 2014",
       position: "Assistant Professor",
       department: "Centre for Applied Research in Electronics",
@@ -100,7 +120,7 @@ const AboutMe = () => {
       type: "past"
     },
     {
-      id: 6,
+      id: 8,
       period: "May 2012-Mar. 2013",
       position: "Postdoctoral Fellow",
       department: "Electrical Engineering",
@@ -109,7 +129,7 @@ const AboutMe = () => {
       type: "past"
     },
     {
-      id: 7,
+      id: 9,
       period: "Jan. 2008-April 2012",
       position: "Research Fellow",
       department: "Electrical Engineering",
@@ -118,7 +138,7 @@ const AboutMe = () => {
       type: "past"
     },
     {
-      id: 8,
+      id: 10,
       period: "Oct. 2003-Dec. 2007",
       position: "Scientist/Engineer",
       department: "Space Applications Centre",
@@ -359,7 +379,7 @@ const AboutMe = () => {
                     <div className="grid md:grid-cols-2 gap-6">
                       <ContentItem
                         title="Research Excellence"
-                        description="Over 100+ publications in premier journals and conferences, 10 patents, and several authored books and book chapters in the field of RF and microwave engineering."
+                        description="Over 130+ publications in premier journals and conferences, 11 patents, and several authored books and book chapters in the field of RF and microwave engineering."
                         type="award"
                         icon={<Award size={20} />}
                       />
@@ -486,6 +506,12 @@ const AboutMe = () => {
         Roles at IIT Roorkee
       </h3>
       <ul className="list-disc pl-6 text-gray-700 space-y-2">
+                <li>
+          <span className="font-semibold text-orange-700">
+            Dean, International Relations
+          </span>
+          , IIT Roorkee
+        </li>
         <li>
           <span className="font-semibold text-orange-700">
             Head, Centre for Semiconductor Design &amp; Technology
